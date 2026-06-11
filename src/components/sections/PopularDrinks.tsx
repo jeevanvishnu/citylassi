@@ -44,7 +44,7 @@ const PopularDrinks: React.FC = () => {
   return (
     <section
       id="popular"
-      className="relative bg-[#FAFAF8] py-32 overflow-hidden"
+      className="relative bg-[#FAFAF8] pt-32 pb-16 overflow-hidden"
       aria-labelledby="drinks-heading"
     >
       {/* Decorative Background Elements */}
@@ -85,7 +85,7 @@ const PopularDrinks: React.FC = () => {
           onTouchEnd={() => setIsHovered(false)}
         >
           {drinks.map((drink) => (
-            <div key={drink.id} className="w-[calc((100%-4rem)/3)] min-w-[280px] md:min-w-0 snap-start shrink-0">
+            <div key={drink.id} className="w-full sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-6rem)/4)] min-w-[280px] sm:min-w-0 snap-start shrink-0">
               <DrinkCard {...drink} />
             </div>
           ))}

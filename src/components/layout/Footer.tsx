@@ -42,8 +42,8 @@ const InstagramIcon = (props: any) => (
 const quickLinks = ['Home', 'About', 'Menu', 'Contact'];
 
 const menuLinks = [
-  'Lassi', 'Dry Shakes', 'Smoothies', 'Boba', 'Kulki', 
-  'Milk Shake', 'Fresh Juices', 'Falooda', 'Avil Milk', 
+  'Lassi', 'Dry Shakes', 'Smoothies', 'Boba', 'Kulki',
+  'Milk Shake', 'Fresh Juices', 'Falooda', 'Avil Milk',
   'Ice Creams', 'With Cream', 'Ice Crushes', 'Mojito'
 ];
 
