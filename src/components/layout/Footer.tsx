@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { MapPin, Phone, Mail } from 'lucide-react';
 
 const FacebookIcon = (props: any) => (
@@ -46,12 +47,12 @@ const menuLinks = [
   'Ice Creams', 'With Cream', 'Ice Crushes', 'Mojito'
 ];
 
-const columnVariant = {
+const columnVariant: Variants = {
   hidden: { y: 40, opacity: 0 },
   show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
-const containerVariant = {
+const containerVariant: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
 };

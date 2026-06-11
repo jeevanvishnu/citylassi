@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import type { Drink } from '../../data/drinks';
 
 type DrinkCardProps = Omit<Drink, 'id'>;
 
-const cardVariant = {
+const cardVariant: Variants = {
   hidden: { y: 30, opacity: 0 },
   show: {
     y: 0,

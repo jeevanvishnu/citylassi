@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import DrinkCard from './DrinkCard';
 import { drinks } from '../../data/drinks';
 
-const containerVariant = {
+const containerVariant: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -11,7 +12,7 @@ const containerVariant = {
   },
 };
 
-const headerVariant = {
+const headerVariant: Variants = {
   hidden: { opacity: 0, y: -20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };

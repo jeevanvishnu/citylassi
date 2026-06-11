@@ -33,15 +33,7 @@ const testimonials = [
   },
 ];
 
-const containerVariant = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
-};
 
-const itemVariant = {
-  hidden: { y: 40, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-};
 
 const Testimonials: React.FC = () => {
   return (
