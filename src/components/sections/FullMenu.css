@@ -1,0 +1,33 @@
+.full-menu-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+.full-menu-cards {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  width: 70svw;
+  position: relative;
+  z-index: 20;
+}
+
+.full-menu-cards > * {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.full-menu-cards li {
+  list-style: none;
+}
+
+.full-menu-card {
+  height: 70svh;
+  min-height: auto;
+  padding: 30px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: transform, clip-path;
+}
