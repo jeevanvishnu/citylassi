@@ -4,25 +4,32 @@ import SectionHeading from '../ui/SectionHeading';
 
 const testimonials = [
   {
-    quote: "Hands down the best mango lassi I've ever had. Thick, creamy, and bursting with real fruit.",
-    name: "Priya S.",
-    location: "Mumbai",
+    quote: "Refreshing juices, affordable prices, and excellent service. City Lassy truly serves the best fresh juices in Deira.",
+    name: "Rajesh P",
+    location: "Deira",
     rating: 5,
-    avatar: "🧑🏽‍🦱",
+    avatar: "👨🏾‍🦱",
   },
   {
-    quote: "My go-to spot every summer. The watermelon cooler is absolutely refreshing. No sugar, pure nature.",
-    name: "Arjun M.",
-    location: "Pune",
+    quote: "Absolutely the best lassi in Dubai! The mango lassi is creamy, refreshing, and reminds me of home. Highly recommend City Lassy for anyone craving authentic taste.",
+    name: "Aisha K",
+    location: "Dubai",
+    rating: 5,
+    avatar: "👩🏽",
+  },
+  {
+    quote: "The falooda was heavenly – rich, colorful, and full of flavor. Plus, the delivery was super fast. City Lassy is now my go-to juice shop.",
+    name: "Mohammed R",
+    location: "Dubai",
     rating: 5,
     avatar: "👨🏾‍🦰",
   },
   {
-    quote: "Love that they use zero preservatives. You can actually taste the difference. City Lassi is a gem.",
-    name: "Meera K.",
-    location: "Bangalore",
+    quote: "I tried the avocado milkshake and it was the best I’ve ever had! Fresh, healthy, and so delicious. Can’t wait to try more flavors.",
+    name: "Fatima S",
+    location: "Dubai",
     rating: 5,
-    avatar: "👩🏽",
+    avatar: "🧕🏽",
   },
 ];
 
@@ -50,42 +57,48 @@ const Testimonials: React.FC = () => {
           align="center"
         />
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4"
-          variants={containerVariant}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-        >
-          {testimonials.map((t) => (
-            <motion.div
-              key={t.name}
-              variants={itemVariant}
-              className="bg-brand-cream border border-brand-lemon rounded-3xl p-6 flex flex-col gap-4 backdrop-blur-sm hover:border-brand-yellow transition-colors duration-300 cursor-default"
-            >
-              {/* Stars */}
-              <div className="flex gap-0.5">
-                {Array.from({ length: t.rating }).map((_, i) => (
-                  <span key={i} className="text-brand-yellow text-lg" aria-hidden="true">★</span>
-                ))}
-              </div>
+        <div className="relative overflow-hidden mt-10 -mx-5 md:-mx-10 px-5 md:px-10">
+          <div className="absolute top-0 bottom-0 left-0 w-12 md:w-24 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute top-0 bottom-0 right-0 w-12 md:w-24 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10 pointer-events-none"></div>
+          
+          <motion.div
+            className="flex gap-6 w-max"
+            animate={{ x: ["0%", "calc(-50% - 12px)"] }}
+            transition={{
+              repeat: Infinity,
+              ease: "linear",
+              duration: 25,
+            }}
+          >
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div
+                key={i}
+                className="w-[300px] md:w-[350px] shrink-0 bg-brand-cream border border-brand-lemon rounded-3xl p-6 flex flex-col gap-4 backdrop-blur-sm hover:border-brand-yellow transition-colors duration-300 cursor-default"
+              >
+                {/* Stars */}
+                <div className="flex gap-0.5">
+                  {Array.from({ length: t.rating }).map((_, idx) => (
+                    <span key={idx} className="text-brand-yellow text-lg" aria-hidden="true">★</span>
+                  ))}
+                </div>
 
-              {/* Quote */}
-              <p className="font-body text-brand-muted text-sm leading-relaxed flex-1">
-                &ldquo;{t.quote}&rdquo;
-              </p>
+                {/* Quote */}
+                <p className="font-body text-brand-muted text-sm leading-relaxed flex-1">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
 
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-4 border-t border-brand-lemon">
-                <span className="text-2xl" aria-hidden="true">{t.avatar}</span>
-                <div>
-                  <p className="font-heading font-semibold text-brand-dark text-sm">{t.name}</p>
-                  <p className="font-body text-brand-muted text-xs">{t.location}</p>
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-4 border-t border-brand-lemon">
+                  <span className="text-2xl" aria-hidden="true">{t.avatar}</span>
+                  <div>
+                    <p className="font-heading font-semibold text-brand-dark text-sm">{t.name}</p>
+                    <p className="font-body text-brand-muted text-xs">{t.location}</p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

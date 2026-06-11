@@ -1,13 +1,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Leaf, Camera, Globe, Send, MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
-const quickLinks = ['Home', 'About', 'Menu', 'Blog', 'Contact'];
+const FacebookIcon = (props: any) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
 
-const hours = [
-  { day: 'Monday – Friday', time: '8:00 AM – 10:00 PM' },
-  { day: 'Saturday', time: '7:00 AM – 11:00 PM' },
-  { day: 'Sunday', time: '9:00 AM – 9:00 PM' },
+const InstagramIcon = (props: any) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const quickLinks = ['Home', 'About', 'Menu', 'Contact'];
+
+const menuLinks = [
+  'Lassi', 'Dry Shakes', 'Smoothies', 'Boba', 'Kulki', 
+  'Milk Shake', 'Fresh Juices', 'Falooda', 'Avil Milk', 
+  'Ice Creams', 'With Cream', 'Ice Crushes', 'Mojito'
 ];
 
 const columnVariant = {
@@ -41,14 +77,13 @@ const Footer: React.FC = () => {
               <img src="/hero/logo.webp" alt="City Lassi Logo" className="w-10 h-10 object-contain flex-shrink-0" />
               <span className="font-display font-bold text-xl text-white">City Lassi</span>
             </div>
-            <p className="font-body text-white/60 text-sm leading-relaxed max-w-[240px]">
-              Blending freshness &amp; tradition in every sip. Pure, handcrafted, and made with love since 2010.
+            <p className="font-body text-white/60 text-sm leading-relaxed max-w-[280px]">
+              City Lassy – Dubai’s favorite spot for fresh lassis, faloodas, milkshakes, and juices. Sip happiness with every glass, delivered with love across Deira and beyond.
             </p>
             <div className="flex items-center gap-3 mt-1">
               {[
-                { Icon: Camera, label: 'Instagram' },
-                { Icon: Globe, label: 'Facebook' },
-                { Icon: Send, label: 'WhatsApp' },
+                { Icon: FacebookIcon, label: 'Facebook' },
+                { Icon: InstagramIcon, label: 'Instagram' },
               ].map(({ Icon, label }) => (
                 <a
                   key={label}
@@ -82,17 +117,20 @@ const Footer: React.FC = () => {
             </nav>
           </motion.div>
 
-          {/* Col 3 — Opening Hours */}
+          {/* Col 3 — Menu */}
           <motion.div variants={columnVariant}>
-            <h4 className="font-heading font-semibold text-white text-base mb-5 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-brand-yellow" />
-              We're Open
+            <h4 className="font-heading font-semibold text-white text-base mb-5">
+              Menu
             </h4>
-            <ul className="flex flex-col gap-3">
-              {hours.map((h) => (
-                <li key={h.day} className="flex flex-col gap-0.5">
-                  <span className="font-body text-white/80 text-sm">{h.day}</span>
-                  <span className="font-accent text-brand-yellow text-base">{h.time}</span>
+            <ul className="grid grid-cols-2 gap-2">
+              {menuLinks.map((link) => (
+                <li key={link}>
+                  <a
+                    href={`#${link.toLowerCase().replace(/ /g, '-')}`}
+                    className="font-body text-white/60 text-sm hover:text-brand-yellow transition-colors duration-200 cursor-pointer"
+                  >
+                    {link}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -100,32 +138,39 @@ const Footer: React.FC = () => {
 
           {/* Col 4 — Contact */}
           <motion.div variants={columnVariant}>
-            <h4 className="font-heading font-semibold text-white text-base mb-5">Get in Touch</h4>
+            <h4 className="font-heading font-semibold text-white text-base mb-5">Address</h4>
             <address className="not-italic flex flex-col gap-4">
               <a
-                href="https://maps.google.com"
+                href="https://maps.google.com/?q=Shop#02, Al Raffi Building, Near Naif palace Hotel, Sabhka Road, Deira, Dubai"
                 className="flex items-start gap-3 text-white/60 hover:text-brand-yellow transition-colors duration-200 cursor-pointer group"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-yellow" />
                 <span className="font-body text-sm leading-relaxed">
-                  12, MG Road, Matunga,<br />Mumbai, Maharashtra 400019
+                  Shop#02, Al Raffi Building, <br />Near Naif palace Hotel, <br />Sabhka Road, Deira, Dubai
                 </span>
               </a>
               <a
-                href="tel:+912212345678"
+                href="tel:+971521064442"
                 className="flex items-center gap-3 text-white/60 hover:text-brand-yellow transition-colors duration-200 cursor-pointer"
               >
                 <Phone className="w-4 h-4 flex-shrink-0 text-brand-yellow" />
-                <span className="font-body text-sm">+91 22 1234 5678</span>
+                <span className="font-body text-sm">+971 52 106 4442</span>
               </a>
               <a
-                href="mailto:hello@citylassi.com"
+                href="tel:+97143449122"
+                className="flex items-center gap-3 text-white/60 hover:text-brand-yellow transition-colors duration-200 cursor-pointer"
+              >
+                <Phone className="w-4 h-4 flex-shrink-0 text-brand-yellow" />
+                <span className="font-body text-sm">+971 4 3 44 91 22</span>
+              </a>
+              <a
+                href="mailto:sales@citylassi.com"
                 className="flex items-center gap-3 text-white/60 hover:text-brand-yellow transition-colors duration-200 cursor-pointer"
               >
                 <Mail className="w-4 h-4 flex-shrink-0 text-brand-yellow" />
-                <span className="font-body text-sm">hello@citylassi.com</span>
+                <span className="font-body text-sm">sales@citylassi.com</span>
               </a>
             </address>
           </motion.div>

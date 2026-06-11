@@ -6,6 +6,7 @@ import MarqueeBanner from './components/sections/MarqueeBanner';
 import About from './components/sections/About';
 import PopularDrinks from './components/sections/PopularDrinks';
 import FullMenu from './components/sections/FullMenu';
+import FeatureCards from './components/sections/FeatureCards';
 import Testimonials from './components/sections/Testimonials';
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <MarqueeBanner />
         <PopularDrinks />
         <FullMenu />
+        <FeatureCards />
         <Testimonials />
       </main>
       <Footer />

@@ -26,7 +26,7 @@ const PopularDrinks: React.FC = () => {
     const interval = setInterval(() => {
       if (scrollRef.current) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        
+
         // If we've reached the end, smoothly scroll back to the start
         if (scrollLeft + clientWidth >= scrollWidth - 10) {
           scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
@@ -69,7 +69,7 @@ const PopularDrinks: React.FC = () => {
             </p>
           </motion.div>
         </motion.div>
-        
+
         <motion.div
           ref={scrollRef}
           className="flex overflow-x-auto gap-8 pb-16 pt-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
