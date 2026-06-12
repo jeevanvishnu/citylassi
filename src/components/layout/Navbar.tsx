@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Menu', href: '/#menu' },
+  { label: 'Menu', href: '/menu' },
   { label: 'Blog', href: '/#blog' },
   { label: 'Contact', href: '/#contact' },
 ];
