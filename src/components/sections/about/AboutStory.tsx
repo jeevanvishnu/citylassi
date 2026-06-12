@@ -149,7 +149,7 @@ const AboutStory: React.FC = () => {
             {features.map((feature, i) => (
               <div 
                 key={i}
-                ref={(el) => (cardsRef.current[i] = el)}
+                ref={(el) => { cardsRef.current[i] = el; }}
                 className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl border border-brand-dark/5 transition-all duration-300 group hover:-translate-y-1"
               >
                 <div className="w-12 h-12 rounded-2xl bg-brand-cream flex items-center justify-center mb-5 group-hover:bg-brand-yellow transition-colors duration-300">

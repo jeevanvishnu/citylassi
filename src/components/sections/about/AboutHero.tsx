@@ -53,7 +53,7 @@ const AboutHero: React.FC = () => {
         {previewImages.map((image, i) => (
           <img
             key={image.id}
-            ref={(el) => (bgRefs.current[i] = el)}
+            ref={(el) => { bgRefs.current[i] = el; }}
             src={image.src}
             alt={image.alt}
             className="absolute inset-0 w-full h-full object-cover"
