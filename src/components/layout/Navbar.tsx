@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-md shadow-brand-yellow/10'
-          : 'bg-transparent'
+          : 'bg-white/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-none shadow-sm shadow-brand-yellow/5 md:shadow-none'
           }`}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -110,14 +110,14 @@ const Navbar: React.FC = () => {
 
           {/* Mobile hamburger */}
           <button
-            className={`flex md:hidden items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 cursor-pointer ${isScrolled ? 'hover:bg-brand-lemon' : hasDarkHero ? 'hover:bg-white/10' : 'hover:bg-brand-lemon'}`}
+            className="flex md:hidden items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 cursor-pointer hover:bg-brand-lemon"
             onClick={() => setIsMenuOpen((v) => !v)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? (
-              <X className={`w-5 h-5 ${isScrolled || !hasDarkHero ? 'text-brand-dark' : 'text-white'}`} />
+              <X className="w-5 h-5 text-brand-dark" />
             ) : (
-              <Menu className={`w-5 h-5 ${isScrolled || !hasDarkHero ? 'text-brand-dark' : 'text-white'}`} />
+              <Menu className="w-5 h-5 text-brand-dark" />
             )}
           </button>
         </div>
@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-brand-cream/98 backdrop-blur-sm flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-40 bg-brand-cream/95 backdrop-blur-md flex flex-col items-center justify-center gap-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
