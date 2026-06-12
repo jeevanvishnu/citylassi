@@ -102,7 +102,9 @@ const Navbar: React.FC = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.4 }}
             >
-              <Button variant="primary" size="sm">Order Now</Button>
+              <a href="https://api.whatsapp.com/send/?phone=971521064442&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">
+                <Button variant="primary" size="sm">Order Now</Button>
+              </a>
             </motion.div>
           </div>
 
@@ -154,9 +156,11 @@ const Navbar: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.3 }}
             >
-              <Button variant="primary" size="lg" onClick={() => setIsMenuOpen(false)}>
-                Order Now
-              </Button>
+              <a href="https://api.whatsapp.com/send/?phone=971521064442&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">
+                <Button variant="primary" size="lg" onClick={() => setIsMenuOpen(false)}>
+                  Order Now
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         )}

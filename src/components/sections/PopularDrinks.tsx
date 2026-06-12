@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import DrinkCard from './DrinkCard';
 import { drinks } from '../../data/drinks';
+import { Link } from 'react-router-dom';
 
 const containerVariant: Variants = {
   hidden: { opacity: 0 },
@@ -99,13 +100,13 @@ const PopularDrinks: React.FC = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <a
-            href="#full-menu"
-            className="inline-flex items-center gap-2 font-body font-bold text-brand-dark bg-brand-yellow hover:bg-brand-amber active:scale-95 shadow-sm hover:shadow-md px-10 py-4 rounded-full transition-all duration-300 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
+          <Link
+            to="/menu"
+            className="inline-flex items-center gap-2 font-body font-bold text-brand-dark bg-brand-yellow hover:bg-brand-orange active:scale-95 shadow-sm hover:shadow-md px-10 py-4 rounded-full transition-all duration-300 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
           >
             Explore Full Menu
             <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
