@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ArrowRight, Clock } from 'lucide-react';
 
 interface BlogCardProps {
+  slug: string;
   image: string;
   category: string;
   date: string;
@@ -14,6 +16,7 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
+  slug,
   image,
   category,
   date,
@@ -82,38 +85,41 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
   return (
     <article ref={cardRef} className="blog-card" id={`blog-card-${index}`}>
-      <div className="blog-card__image-wrapper">
-        <img
-          src={image}
-          alt={title}
-          className="blog-card__image"
-          loading="lazy"
-        />
-        <div className="blog-card__image-overlay" />
-        <span className="blog-card__category">{category}</span>
-        <span className="blog-card__read-time">
-          <Clock size={12} />
-          {readTime}
-        </span>
-      </div>
-
-      <div className="blog-card__body">
-        <span className="blog-card__date">{date}</span>
-        <h2 className="blog-card__title">{title}</h2>
-        <p className="blog-card__excerpt">{excerpt}</p>
-      </div>
-
-      <div className="blog-card__footer">
-        <div className="blog-card__author">
-          <div className="blog-card__author-avatar">{initials}</div>
-          <span className="blog-card__author-name">{author}</span>
+      <Link to={`/blog/${slug}`} className="blog-card__link" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div className="blog-card__image-wrapper">
+          <img
+            src={image}
+            alt={title}
+            className="blog-card__image"
+            loading="lazy"
+          />
+          <div className="blog-card__image-overlay" />
+          <span className="blog-card__category">{category}</span>
+          <span className="blog-card__read-time">
+            <Clock size={12} />
+            {readTime}
+          </span>
         </div>
-        <span className="blog-card__read-link">
-          Read More <ArrowRight size={14} />
-        </span>
-      </div>
+
+        <div className="blog-card__body">
+          <span className="blog-card__date">{date}</span>
+          <h2 className="blog-card__title">{title}</h2>
+          <p className="blog-card__excerpt">{excerpt}</p>
+        </div>
+
+        <div className="blog-card__footer">
+          <div className="blog-card__author">
+            <div className="blog-card__author-avatar">{initials}</div>
+            <span className="blog-card__author-name">{author}</span>
+          </div>
+          <span className="blog-card__read-link">
+            Read More <ArrowRight size={14} />
+          </span>
+        </div>
+      </Link>
     </article>
   );
 };
 
 export default BlogCard;
+
