@@ -9,15 +9,21 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Menu', href: '/menu' },
-  { label: 'Blog', href: '/#blog' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
+
+// Pages with dark hero backgrounds where nav text should be white
+const darkHeroRoutes = ['/about'];
 
 const Navbar: React.FC = () => {
   const isScrolled = useScrollNavbar(60);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Determine if the current page has a dark hero
+  const hasDarkHero = darkHeroRoutes.includes(location.pathname) || location.pathname === '/';
 
   useEffect(() => {
     if (location.hash) {
@@ -80,7 +86,7 @@ const Navbar: React.FC = () => {
                 <a
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className="font-body text-sm font-medium text-brand-dark hover:text-brand-orange transition-colors duration-200 cursor-pointer relative group"
+                  className={`font-body text-sm font-medium transition-colors duration-200 cursor-pointer relative group ${isScrolled ? 'text-brand-dark hover:text-brand-orange' : hasDarkHero ? 'text-white/90 hover:text-brand-yellow' : 'text-brand-dark hover:text-brand-orange'}`}
                 >
                   {link.label}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-brand-yellow rounded-full transition-all duration-300 group-hover:w-full" />
@@ -102,14 +108,14 @@ const Navbar: React.FC = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="flex md:hidden items-center justify-center w-10 h-10 rounded-full hover:bg-brand-lemon transition-colors duration-200 cursor-pointer"
+            className={`flex md:hidden items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 cursor-pointer ${isScrolled ? 'hover:bg-brand-lemon' : hasDarkHero ? 'hover:bg-white/10' : 'hover:bg-brand-lemon'}`}
             onClick={() => setIsMenuOpen((v) => !v)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? (
-              <X className="w-5 h-5 text-brand-dark" />
+              <X className={`w-5 h-5 ${isScrolled || !hasDarkHero ? 'text-brand-dark' : 'text-white'}`} />
             ) : (
-              <Menu className="w-5 h-5 text-brand-dark" />
+              <Menu className={`w-5 h-5 ${isScrolled || !hasDarkHero ? 'text-brand-dark' : 'text-white'}`} />
             )}
           </button>
         </div>

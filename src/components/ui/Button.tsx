@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const variants = {
     primary:
-      'bg-brand-yellow text-brand-dark hover:bg-brand-amber active:scale-95 shadow-sm hover:shadow-md',
+      'bg-brand-yellow text-brand-dark hover:bg-brand-orange active:scale-95 shadow-sm hover:shadow-md',
     outline:
       'border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-brand-yellow active:scale-95',
     ghost:
