@@ -1,26 +1,19 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Hero from './components/sections/Hero';
-import MarqueeBanner from './components/sections/MarqueeBanner';
-import About from './components/sections/About';
-import PopularDrinks from './components/sections/PopularDrinks';
-import FullMenu from './components/sections/FullMenu';
-import FeatureCards from './components/sections/FeatureCards';
-import Testimonials from './components/sections/Testimonials';
+import Home from './pages/Home';
+import AboutPage from './pages/AboutPage';
 
 const App: React.FC = () => {
   return (
     <div className="min-h-screen font-body">
       <Navbar />
       <main>
-        <Hero />
-        <About />
-        <MarqueeBanner />
-        <PopularDrinks />
-        <FullMenu />
-        <FeatureCards />
-        <Testimonials />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
       </main>
       <Footer />
     </div>

@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useScrollNavbar } from '../../hooks/useScrollNavbar';
 import Button from '../ui/Button';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Menu', href: '#menu' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Menu', href: '/#menu' },
+  { label: 'Blog', href: '/#blog' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const Navbar: React.FC = () => {
   const isScrolled = useScrollNavbar(60);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('/#')) {
+      const hash = href.substring(1);
+      if (location.pathname !== '/') {
+        navigate(href);
+      } else {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        // Also update url hash without triggering scroll jump
+        window.history.pushState(null, '', href);
+      }
+    } else {
+      navigate(href);
+    }
   };
 
   return (
@@ -36,9 +61,9 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a
-            href="#home"
+            href="/"
             className="flex items-center gap-2 cursor-pointer"
-            onClick={() => handleNavClick('#home')}
+            onClick={(e) => { e.preventDefault(); handleNavClick('/'); }}
           >
             <img src="/hero/logo.webp" alt="City Lassi Logo" className="h-12 md:h-16 w-auto object-contain flex-shrink-0" />
           </a>
