@@ -19,8 +19,8 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-10">
-        <span className="font-accent text-sm text-white drop-shadow-md">Scroll to explore</span>
+      <div className="absolute bottom-8 w-full flex flex-col items-center justify-center gap-2 animate-bounce z-10">
+        <span className="font-accent text-sm text-white drop-shadow-md text-center">Scroll to explore</span>
         <div className="w-5 h-8 border-2 border-white/80 rounded-full flex justify-center pt-1.5 drop-shadow-md">
           <div className="w-1 h-2 bg-white rounded-full" />
         </div>
