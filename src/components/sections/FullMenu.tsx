@@ -13,6 +13,7 @@ const menuItems = [
     price: '₹80',
     tag: 'Best Seller',
     accent: '#F59E0B',
+    image: '/menu/menu01.png',
   },
   {
     name: 'Falooda',
@@ -20,6 +21,7 @@ const menuItems = [
     price: '₹120',
     tag: 'Fan Favourite',
     accent: '#EC4899',
+    image: '/menu/menu02.png',
   },
   {
     name: 'Mojito',
@@ -27,6 +29,7 @@ const menuItems = [
     price: '₹90',
     tag: 'Refreshing',
     accent: '#10B981',
+    image: '/menu/menu03.png',
   },
   {
     name: 'Smoothies',
@@ -34,6 +37,7 @@ const menuItems = [
     price: '₹110',
     tag: 'Seasonal',
     accent: '#8B5CF6',
+    image: '/menu/menu04.png',
   },
   {
     name: 'Ice Cream',
@@ -41,6 +45,7 @@ const menuItems = [
     price: '₹95',
     tag: 'Traditional',
     accent: '#3B82F6',
+    image: '/menu/menu05.png',
   },
 ];
 
@@ -53,29 +58,36 @@ const FullMenu: React.FC = () => {
 
     if (cards.length === 0) return;
 
-    const tl = gsap.timeline({
-      defaults: { ease: 'none' },
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: `${window.innerHeight * 5} top`,
-        scrub: true,
-        pin: true,
-      },
+    const mm = gsap.matchMedia();
+
+    // Desktop: Pin and animate on screens >= 768px
+    mm.add('(min-width: 768px)', () => {
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: `${window.innerHeight * 5} top`,
+          scrub: true,
+          pin: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.from('.full-menu-card:not(:first-child)', {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
+        duration: 1,
+        stagger: 2,
+      });
+
+      tl.to('.full-menu-card:not(:last-child)', {
+        y: () => window.innerHeight,
+        duration: 1,
+        stagger: 2,
+      }, '<');
     });
 
-    tl.from('.full-menu-card:not(:first-child)', {
-      clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-      duration: 1,
-      stagger: 2,
-    });
-
-    tl.to('.full-menu-card:not(:last-child)', {
-      y: window.innerHeight,
-      duration: 1,
-      stagger: 2,
-    }, '<');
-
+    return () => mm.revert();
   }, { scope: sectionRef });
 
   return (
@@ -84,11 +96,11 @@ const FullMenu: React.FC = () => {
         {menuItems.map((item) => (
           <li key={item.name} className="full-menu-card overflow-hidden shadow-2xl relative">
 
-            {/* Full-width mango image */}
+            {/* Full-width menu image */}
             <img
-              src="/mango.png"
+              src={item.image}
               alt={item.name}
-              className="w-full h-full object-contain transition-transform duration-700 hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </li>
         ))}

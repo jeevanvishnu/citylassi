@@ -4,7 +4,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-[100dvh] min-h-[400px] w-full overflow-hidden flex items-center justify-center"
     >
       <video
         src="/hero/banner-video.mp4"

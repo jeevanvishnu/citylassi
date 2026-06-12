@@ -36,6 +36,15 @@ const testimonials = [
 
 
 const Testimonials: React.FC = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <section
       id="blog"
@@ -50,22 +59,26 @@ const Testimonials: React.FC = () => {
         />
 
         <div className="relative overflow-hidden mt-10 -mx-5 md:-mx-10 px-5 md:px-10">
-          <div className="absolute top-0 bottom-0 left-0 w-12 md:w-24 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute top-0 bottom-0 right-0 w-12 md:w-24 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10 pointer-events-none"></div>
+          {!isMobile && (
+            <>
+              <div className="absolute top-0 bottom-0 left-0 w-12 md:w-24 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute top-0 bottom-0 right-0 w-12 md:w-24 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10 pointer-events-none"></div>
+            </>
+          )}
           
           <motion.div
-            className="flex gap-6 w-max"
-            animate={{ x: ["0%", "calc(-50% - 12px)"] }}
-            transition={{
+            className="flex flex-col md:flex-row gap-6 w-full md:w-max justify-center items-center"
+            animate={isMobile ? { x: 0 } : { x: ["0%", "calc(-50% - 12px)"] }}
+            transition={isMobile ? { duration: 0 } : {
               repeat: Infinity,
               ease: "linear",
               duration: 25,
             }}
           >
-            {[...testimonials, ...testimonials].map((t, i) => (
+            {(isMobile ? testimonials : [...testimonials, ...testimonials]).map((t, i) => (
               <div
                 key={i}
-                className="w-[300px] md:w-[350px] shrink-0 bg-brand-cream border border-brand-lemon rounded-3xl p-6 flex flex-col gap-4 backdrop-blur-sm hover:border-brand-yellow transition-colors duration-300 cursor-default"
+                className="w-full max-w-[350px] md:w-[350px] shrink-0 bg-brand-cream border border-brand-lemon rounded-3xl p-6 flex flex-col gap-4 backdrop-blur-sm hover:border-brand-yellow transition-colors duration-300 cursor-default"
               >
                 {/* Stars */}
                 <div className="flex gap-0.5">
