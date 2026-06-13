@@ -89,12 +89,14 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex items-center gap-3 mt-1">
               {[
-                { Icon: FacebookIcon, label: 'Facebook' },
-                { Icon: InstagramIcon, label: 'Instagram' },
-              ].map(({ Icon, label }) => (
+                { Icon: FacebookIcon, label: 'Facebook', href: 'https://www.facebook.com/people/Citylassi/61581368656513/' },
+                { Icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/citylassi?igsh=MWo1dDd2eHc0ajFjeA%3D%3D&utm_source=qr' },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={`City Lassi on ${label}`}
                   className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors duration-200 cursor-pointer"
                 >
