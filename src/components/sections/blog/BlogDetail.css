@@ -73,11 +73,12 @@
   inset: 0;
   z-index: 2;
   background: linear-gradient(
-    to top,
-    rgba(26, 18, 0, 0.92) 0%,
-    rgba(26, 18, 0, 0.6) 40%,
-    rgba(26, 18, 0, 0.2) 70%,
-    transparent 100%
+    to bottom,
+    rgba(26, 18, 0, 0.5) 0%,
+    rgba(26, 18, 0, 0.1) 20%,
+    rgba(26, 18, 0, 0.3) 60%,
+    rgba(26, 18, 0, 0.8) 85%,
+    rgba(26, 18, 0, 0.95) 100%
   );
 }
 

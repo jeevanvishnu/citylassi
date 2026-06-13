@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FacebookIcon = (props: any) => (
   <svg
@@ -39,7 +40,12 @@ const InstagramIcon = (props: any) => (
   </svg>
 );
 
-const quickLinks = ['Home', 'About', 'Menu', 'Contact'];
+const quickLinks = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Menu', path: '/menu' },
+  { label: 'Contact', path: '/contact' },
+];
 
 const menuLinks = [
   'Lassi', 'Dry Shakes', 'Smoothies', 'Boba', 'Kulki',
@@ -104,14 +110,14 @@ const Footer: React.FC = () => {
             <nav aria-label="Footer navigation">
               <ul className="flex flex-col gap-3">
                 {quickLinks.map((link) => (
-                  <li key={link}>
-                    <a
-                      href={`#${link.toLowerCase()}`}
+                  <li key={link.label}>
+                    <Link
+                      to={link.path}
                       className="font-body text-white/60 text-sm hover:text-brand-yellow transition-colors duration-200 cursor-pointer group flex items-center gap-2"
                     >
                       <span className="w-0 h-px bg-brand-yellow transition-all duration-200 group-hover:w-3" />
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -126,12 +132,12 @@ const Footer: React.FC = () => {
             <ul className="grid grid-cols-2 gap-2">
               {menuLinks.map((link) => (
                 <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase().replace(/ /g, '-')}`}
+                  <Link
+                    to={`/menu#${link.toLowerCase().replace(/ /g, '-')}`}
                     className="font-body text-white/60 text-sm hover:text-brand-yellow transition-colors duration-200 cursor-pointer"
                   >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -180,19 +186,10 @@ const Footer: React.FC = () => {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-5 md:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 py-5 flex items-center justify-center text-sm">
           <p className="font-body text-white/40">
-            &copy; {new Date().getFullYear()} City Lassi. All rights reserved.
+            &copy; 2026 City Lassi. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
-            <a href="#" className="font-body text-white/40 hover:text-white/70 transition-colors duration-200 cursor-pointer">
-              Privacy Policy
-            </a>
-            <span className="text-white/20">·</span>
-            <a href="#" className="font-body text-white/40 hover:text-white/70 transition-colors duration-200 cursor-pointer">
-              Terms of Service
-            </a>
-          </div>
         </div>
       </div>
     </footer>

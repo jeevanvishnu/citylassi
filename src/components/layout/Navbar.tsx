@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
 
   // Determine if the current page has a dark hero
-  const hasDarkHero = darkHeroRoutes.includes(location.pathname) || location.pathname === '/';
+  const hasDarkHero = darkHeroRoutes.includes(location.pathname) || location.pathname === '/' || location.pathname.startsWith('/blog/');
 
   useEffect(() => {
     if (location.hash) {
