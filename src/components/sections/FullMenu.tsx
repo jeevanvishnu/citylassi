@@ -1,110 +1,125 @@
-import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import React, { useEffect, useRef } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './FullMenu.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const menuItems = [
   {
-    name: 'Lassi',
-    description: 'Our signature blend of yogurt and fresh fruits, crafted for the perfect balance of sweet and tangy.',
-    price: '₹80',
+    name: 'Mango Lassi',
+    description: 'A luxurious, velvety blend of fresh homemade yogurt and ripe fruits. Churned to perfection and garnished with crushed pistachios for a truly royal refreshment.',
     tag: 'Best Seller',
     accent: '#F59E0B',
-    image: '/menu/menu01.png',
+    image: '/menu/lassi.png',
   },
   {
     name: 'Falooda',
-    description: 'A rich, layered dessert drink with sweet basil seeds, vermicelli, rose syrup, and ice cream.',
-    price: '₹120',
+    description: 'A majestic dessert layered with chilled milk, sweet rose syrup, basil seeds, and silky vermicelli. Crowned with a generous scoop of premium ice cream and roasted nuts.',
     tag: 'Fan Favourite',
     accent: '#EC4899',
-    image: '/menu/menu02.png',
+    image: '/menu/falooda.png',
   },
   {
-    name: 'Mojito',
-    description: 'Refreshing mint and lime muddled to perfection, topped with sparkling water for a revitalizing kick.',
-    price: '₹90',
+    name: 'Mint Mojito',
+    description: 'An invigorating burst of freshness featuring muddled wild mint, zesty lime wedges, and crushed ice. Topped with sparkling water to instantly awaken your senses.',
     tag: 'Refreshing',
     accent: '#10B981',
-    image: '/menu/menu03.png',
+    image: '/menu/Mojito.png',
   },
   {
-    name: 'Smoothies',
-    description: 'Thick, creamy, and packed with nutrients. Made with 100% natural fruit and zero artificial flavors.',
-    price: '₹110',
+    name: 'Fruit Smoothie',
+    description: 'A thick, creamy concoction packed with an abundance of fresh, ripe fruits. Blended to a flawless smooth texture with zero artificial flavors—just pure, natural vitality.',
     tag: 'Seasonal',
     accent: '#8B5CF6',
-    image: '/menu/menu04.png',
+    image: '/menu/smoothie.png',
   },
   {
-    name: 'Ice Cream',
-    description: 'Indulgent, velvety ice cream available in classic and unique flavors to satisfy your sweet tooth.',
-    price: '₹95',
+    name: 'Chocolate ',
+    description: 'A towering masterpiece of rich cocoa. Cascading with dark chocolate fudge, loaded with chewy brownie chunks, chocolate curls, and crowned with premium chocolate ice cream.',
     tag: 'Traditional',
     accent: '#3B82F6',
-    image: '/menu/menu05.png',
+    image: '/menu/chocolate.png',
   },
 ];
 
 const FullMenu: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLUListElement>(null);
+  const cardsRef = useRef<(HTMLLIElement | null)[]>([]);
 
-  useGSAP(() => {
-    const cards = gsap.utils.toArray('.full-menu-card');
+  useEffect(() => {
+    // Kill any stale GSAP ScrollTriggers that may still be pinning the page
+    try {
+      // @ts-ignore
+      const { ScrollTrigger } = window.__gsap__ || {};
+      if (ScrollTrigger) ScrollTrigger.killAll();
+    } catch (_) {}
 
-    if (cards.length === 0) return;
+    // Use IntersectionObserver for fade-up — zero scroll interference
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('menu-card-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    const mm = gsap.matchMedia();
-
-    // Desktop: Pin and animate on screens >= 768px
-    mm.add('(min-width: 768px)', () => {
-      const tl = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: `${window.innerHeight * 5} top`,
-          scrub: true,
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      tl.from('.full-menu-card:not(:first-child)', {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-        duration: 1,
-        stagger: 2,
-      });
-
-      tl.to('.full-menu-card:not(:last-child)', {
-        y: () => window.innerHeight,
-        duration: 1,
-        stagger: 2,
-      }, '<');
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
     });
 
-    return () => mm.revert();
-  }, { scope: sectionRef });
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section ref={sectionRef} id="full-menu" className="full-menu-section bg-[#FAFAF8]">
-      <ul className="full-menu-cards" ref={cardsRef}>
-        {menuItems.map((item) => (
-          <li key={item.name} className="full-menu-card overflow-hidden shadow-2xl relative">
+    <section id="full-menu" className="bg-[#FAFAF8] py-20 md:py-32">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <ul className="flex flex-col gap-16 md:gap-24">
+          {menuItems.map((item, index) => (
+            <li
+              key={item.name}
+              ref={(el) => { cardsRef.current[index] = el; }}
+              className="menu-card-init overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-2xl bg-white flex flex-col md:flex-row"
+            >
+              {/* Image Side */}
+              <div className={`w-full md:w-1/2 aspect-square relative overflow-hidden ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </div>
 
-            {/* Full-width menu image */}
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-            />
-          </li>
-        ))}
-      </ul>
+              {/* Text Side */}
+              <div className={`w-full md:w-1/2 flex flex-col justify-center items-center text-center p-8 md:p-16 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
+                <span
+                  className="inline-block px-5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] mb-6 md:mb-8 rounded-full"
+                  style={{ color: item.accent, backgroundColor: `${item.accent}15` }}
+                >
+                  {item.tag}
+                </span>
+                <h3 className="font-display text-5xl md:text-6xl lg:text-7xl text-[#1A1200] mb-6">
+                  {item.name}
+                </h3>
+                <p className="font-body text-base md:text-lg text-gray-600 max-w-sm mx-auto leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <style>{`
+        .menu-card-init {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .menu-card-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
     </section>
   );
 };
