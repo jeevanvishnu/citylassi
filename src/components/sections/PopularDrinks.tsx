@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import DrinkCard from './DrinkCard';
@@ -19,28 +19,6 @@ const headerVariant: Variants = {
 };
 
 const PopularDrinks: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    if (isHovered) return;
-
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-
-        // If we've reached the end, smoothly scroll back to the start
-        if (scrollLeft + clientWidth >= scrollWidth - 10) {
-          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          // Scroll by exactly one full page (3 cards)
-          scrollRef.current.scrollTo({ left: scrollLeft + clientWidth, behavior: 'smooth' });
-        }
-      }
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [isHovered]);
 
   return (
     <section
@@ -73,22 +51,20 @@ const PopularDrinks: React.FC = () => {
         </motion.div>
 
         <motion.div
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-8 pb-16 pt-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 pb-12 pt-8"
           variants={containerVariant}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.1 }}
           role="list"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onTouchStart={() => setIsHovered(true)}
-          onTouchEnd={() => setIsHovered(false)}
         >
-          {drinks.map((drink) => (
-            <div key={drink.id} className="w-full sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-6rem)/4)] min-w-[280px] sm:min-w-0 snap-start shrink-0">
-              <DrinkCard {...drink} />
-            </div>
+          {drinks.map((drink, index) => (
+            <motion.div 
+              key={drink.id} 
+              className="h-full"
+            >
+              <DrinkCard {...drink} index={index} />
+            </motion.div>
           ))}
         </motion.div>
 
